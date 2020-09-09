@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历</title>
+    <link rel="stylesheet" href="./css/font.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            letter-spacing: 1px;
+        }
+
+        body {
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei",
+                "微软雅黑", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.57142857;
+            color: #333;
+            padding-top: 5px;
+        }
+
+        .clearify::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .wrapper {
+            width: 1024px;
+            margin: 0px auto 50px;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+
+        }
+
+        .basic {
+            padding: 20px 30px 20px 30px;
+        }
+
+        .basic section h1 {
+            font-weight: 400;
+            font-size: 48px;
+            color: #333;
+        }
+
+        .basic section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 30px;
+            font-weight: 400;
+        }
+
+        .relative .right a {
+            display: block;
+            color: #333;
+            text-align: right;
+            text-decoration: none;
+        }
+
+        .relative .right a i {
+            margin-left: 3px;
+        }
+
+        .relative .left {
+            line-height: 2;
+            font-size: 14px;
+        }
+
+        .box {
+            padding: 10px 30px;
+        }
+
+        .box h5 {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        ul {
+            padding: 20px 0 20px 15px;
+        }
+
+        ul li {
+            line-height: 1.5;
+            padding-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .project {
+            position: relative;
+        }
+
+        .c-t {
+            font-weight: 600;
+        }
+
+        .c-js span {
+            margin-right: 10px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .c-msg {
+            line-height: 2;
+        }
+
+        .title::before {
+            content: ' - ';
+            display: inline-block;
+            margin-left: -11px;
+            font-weight: 600;
+        }
+
+        .project-item {
+            padding: 20px 0 0px 0px;
+        }
+
+        .project-item>header {
+            padding: 5px 0;
+        }
+
+        .project-item>div {
+            padding-bottom: 5px;
+        }
+
+        #Work .project-item {
+            padding: 10px 0 0px 0px;
+        }
+
+        #address {
+            font-size: 16px;
+        }
+
+        #salary {
+            font-size: 14px;
+        }
+    </style>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="basic">
+            <section class="clearify">
+                <h1 class="left" id="name"></h1>
+                <h2 class="right">
+                    <span id="position"></span><span> / </span>
+                    <span id="address"></span>
+                    <span id="salary"></span>
+                </h2>
+            </section>
+            <div class="relative clearify">
+                <div class="left">
+                    <div id="sexAndAge"></div>
+                    <div id="workingHours"></div>
+                    <div id="school"></div>
+                </div>
+                <div class="right" id="Contact">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <h5>专业技能</h5>
+            <ul id="major">
+
+            </ul>
+        </div>
+
+        <div class="box">
+            <h5>工作经历</h5>
+            <section class="project clearify" id="Work">
+
+            </section>
+        </div>
+
+        <div class="box">
+            <h5>项目经验</h5>
+            <section class="project clearify" id="Project">
+
+            </section>
+        </div>
+
+        <div class="box">
+            <h5>自我评价</h5>
+            <ul id="Me">
+
+            </ul>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+    <script>
+        function printHtml(name, text) {
+            document.getElementById(name).innerHTML = text;
+        }
+        function printLi(name, Obj) {
+            let html = '';
+            for (obj in Obj) {
+                html += '<li>';
+                html += Obj[obj];
+                html += '</li>';
+            }
+            printHtml(name, html);
+        }
+        window.onload = function () {
+            (function () {
+                for (app in App) {
+
+                    printHtml(app, App[app]);
+                }
+            })();
+
+            (function () {
+                printLi('major', Major);
+            })();
+
+            (function () {
+                let html = '';
+                for (project in Project) {
+                    let item = Project[project];
+                    html += `
+                        <article class="project-item"><header class="clearify"><div class="title left">
+                            ${item.name}
+                        </div><div class="time right">
+                            ${item.time}
+                        </div></header><div class="content"><b class="c-t">项目描述：</b><span class="c-msg">
+                            ${item.projectDesc}
+                        </span></div><div class="content"><b class="c-t">责任描述：</b><span class="c-msg">
+                            ${item.respDesc}
+                        </span></div><div class="content"><b class="c-t">技术栈：</b><span class="c-js">`;
+                    let tec = item.technology.split(' ');
+                    for (t in tec) {
+                        html += `<span>${tec[t]}</span>`
+                    }
+                    html += `</span></div></article>`;
+                }
+                printHtml('Project', html);
+            })();
+
+            (function () {
+                printLi('Me', Me);
+            })();
+
+            (function () {
+                let html = `
+                    <a href="tel:${Contact[0]}">
+                        <span>${Contact[0]}</span>
+                        <i class="fa fa-phone-square"></i>
+                    </a>
+                    <a href="https://www.${Contact[1]}">
+                        <span>${Contact[1]}</span>
+                        <i class="fa fa-git-square"></i>
+                    </a>
+                    <a href="http://${Contact[2]}">
+                        <span>${Contact[2]}</span>
+                        <i class="fa fa-h-square"></i>
+                    </a>
+                    <a href="Mailto:${Contact[3]}">
+                        <span>${Contact[3]}</span>
+                        <i class="fa fa-envelope-square"></i>
+                    </a>
+                `;
+                printHtml('Contact', html);
+            })();
+
+            (function () {
+                let html = '';
+                for (work in Work) {
+                    let item = Work[work];
+                    html += `<article class="project-item">
+                                <header class="clearify">
+                                    <div class="title left">
+                                        ${item.name}
+                                    </div>
+                                    <div class="time right">
+                                        ${item.time}
+                                    </div>
+                                </header>
+                                <div class="content"><span class="c-msg">
+                                        ${item.desc}
+                                    </span></div>
+                            </article>`
+                }
+                printHtml('Work', html);
+            })();
+        }
+    </script>
+</body>
+
+</html>
