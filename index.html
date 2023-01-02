@@ -1,308 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>简历</title>
-    <link rel="stylesheet" href="./css/font.css">
     <style>
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            word-break: break-all;
+            list-style: square;
         }
 
         body {
             position: relative;
             -webkit-font-smoothing: antialiased;
             font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei",
-                "微软雅黑", Arial, sans-serif;
+            "微软雅黑", Arial, sans-serif;
             font-size: 14px;
             line-height: 1.57142857;
             color: #333;
             padding-top: 5px;
         }
 
-        .clearify::after {
-            content: '';
-            display: block;
-            clear: both;
-        }
-
-        .wrapper {
+        .main {
             width: 1024px;
-            margin: 0px auto 50px;
+            margin: 0 auto 50px;
         }
 
-        .left {
-            float: left;
+        header {
+            display: flex;
+            justify-content: space-between;
         }
 
-        .right {
-            float: right;
-
+        header section:nth-of-type(1) {
+            text-align: left;
         }
 
-        .basic {
-            padding: 20px 30px 20px 30px;
+        header section:nth-of-type(2) {
+            text-align: right;
         }
 
-        .basic section h1 {
+        header section article {
+            display: flex;
+        }
+
+        main > section > article, main > header {
+            padding: 10px 30px 10px 30px;
+        }
+
+        main > header > section > h1 {
             font-weight: 400;
             font-size: 48px;
             color: #333;
         }
 
-        .basic section h2 {
+        main > header p {
+            line-height: 2;
+        }
+
+        main > header > section > article {
+            padding: 18px 0;
+            align-items: center;
+        }
+
+        main > header > section > article > h2,
+        main > header > section > article > h3 {
             font-size: 20px;
-            color: #333;
-            margin-top: 30px;
             font-weight: 400;
         }
 
-        .relative .right a {
-            display: block;
-            color: #333;
-            text-align: right;
-            text-decoration: none;
-        }
-
-        .relative .right a i {
-            margin-left: 3px;
-        }
-
-        .relative .left {
-            line-height: 2;
-            font-size: 14px;
-        }
-
-        .box {
-            padding: 10px 30px;
-        }
-
-        .box h5 {
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            color: #333;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        ul {
-            padding: 20px 0 20px 15px;
-        }
-
-        ul li {
-            line-height: 1.5;
-            padding-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .project {
-            position: relative;
-        }
-
-        .c-t {
-            font-weight: 600;
-        }
-
-        .c-js span {
-            margin-right: 10px;
-            font-size: 12px;
-            color: #333;
-        }
-
-        .c-msg {
-            line-height: 2;
-        }
-
-        .title::before {
-            content: ' - ';
-            display: inline-block;
-            margin-left: -11px;
-            font-weight: 600;
-        }
-
-        .project-item {
-            padding: 20px 0 0px 0px;
-        }
-
-        .project-item>header {
-            padding: 5px 0;
-        }
-
-        .project-item>div {
-            padding-bottom: 5px;
-        }
-
-        #Work .project-item {
-            padding: 10px 0 0px 0px;
-        }
-
-        #address {
+        main > header > section > article > h3 {
             font-size: 16px;
         }
 
-        #salary {
+        main > header > section > article > h3::before {
+            content: "/";
+            padding: 0 8px;
+        }
+
+        main > header > section a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        main > header > section a i {
+            padding-left: 6px;
+        }
+
+        main > section > article > h2 {
             font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin: 20px 0 10px 0;
         }
-    </style>
-    <style>
+
+        main > section > article nav {
+            padding-left: 14px;
+        }
+
+        main > section > article li {
+            line-height: 1.5;
+            padding-bottom: 5px;
+        }
+
+        main > section > article > nav > ul > li > p > span {
+            line-height: 2;
+        }
+
+        main > section > article > nav > ul > li > h2 {
+            font-size: 14px;
+            font-weight: 700;
+            padding: 5px 0;
+        }
+
+        p > ul > li {
+            display: flex;
+        }
+
+        .project nav ul li {
+            padding-bottom: 16px;
+        }
+
+        .project nav ul li:last-child {
+            padding-bottom: 0;
+        }
+
+        .project nav ul li p {
+            line-height: 2;
+            padding-bottom: 6px;
+        }
 
     </style>
+    <link rel="stylesheet" href="./css/font.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
-
 <body>
-    <div class="wrapper">
-        <div class="basic">
-            <section class="clearify">
-                <h1 class="left" id="name"></h1>
-                <h2 class="right">
-                    <span id="position"></span><span> / </span>
-                    <span id="address"></span>
-                    <span id="salary"></span>
-                </h2>
-            </section>
-            <div class="relative clearify">
-                <div class="left">
-                    <div id="sexAndAge"></div>
-                    <div id="workingHours"></div>
-                    <div id="school"></div>
-                </div>
-                <div class="right" id="Contact">
+<main class="main" id="app">
 
-                </div>
-            </div>
-        </div>
+    <header>
+        <section>
+            <h1>{{ header.name }}</h1>
+            <p>{{ header.sexAndAge }}</p>
+            <p>{{ header.workingHours }}</p>
+            <p>{{ header.school }}</p>
+        </section>
+        <section>
+            <article>
+                <h2>{{ header.position }}</h2>
+                <h3>{{ header.address }}</h3>
+            </article>
+            <a :href="'tel:' + header.tel">{{ header.tel }}<i class="fa fa-phone-square"></i></a>
+            <a :href="'https://www.github.com/' + header.github">github.com/{{ header.github }}<i
+                    class="fa fa-git-square"></i></a>
+            <a :href="'//' + header.home">{{ header.home }}<i class="fa fa-h-square"></i></a>
+            <a :href="'Mailto:' + header.email">{{ header.email }}<i class="fa fa-envelope-square"></i></a>
+        </section>
+    </header>
 
-        <div class="box">
-            <h5>专业技能</h5>
-            <ul id="major">
+    <section>
+        <article>
+            <h2>专业技能</h2>
+            <nav>
+                <ul>
+                    <li v-for="major in majors">{{ major }}</li>
+                </ul>
+            </nav>
+        </article>
+        <article>
+            <h2>工作经历</h2>
+            <nav>
+                <ul>
+                    <li v-for="work in works">{{ work }}</li>
+                </ul>
+            </nav>
+        </article>
+        <article class="project">
+            <h2>项目经验</h2>
+            <nav style="padding: 0">
+                <ul>
+                    <li v-for="project in projects">
+                        <h2>{{ project.name }}</h2>
+                        <p v-html="project.describe"></p>
+                        <p v-html="project.duty"></p>
+                        <p>
+                            <span v-for="item in project.technology.split(' ')"
+                                  style="font-size: 12px; margin-right: 10px;">{{ item }}</span>
+                        </p>
+                    </li>
+                </ul>
+            </nav>
+        </article>
 
-            </ul>
-        </div>
+        <article>
+            <h2>个人作品</h2>
+            <nav>
+                <ul>
+                    <li v-for="item in personalWorks">{{ item }}</li>
+                </ul>
+            </nav>
+        </article>
 
-        <div class="box">
-            <h5>工作经历</h5>
-            <section class="project clearify" id="Work">
+        <!--        <article>-->
+        <!--            <h2>自我评价</h2>-->
+        <!--            <nav>-->
+        <!--                <ul>-->
+        <!--                    <li v-for="judge in judges">{{ judge }}</li>-->
+        <!--                </ul>-->
+        <!--            </nav>-->
+        <!--        </article>-->
+    </section>
 
-            </section>
-        </div>
+</main>
 
-        <div class="box">
-            <h5>项目经验</h5>
-            <section class="project clearify" id="Project">
-
-            </section>
-        </div>
-
-        <div class="box">
-            <h5>自我评价</h5>
-            <ul id="Me">
-
-            </ul>
-        </div>
-    </div>
-
-    <script src="./index.js"></script>
-    <script>
-        function printHtml(name, text) {
-            document.getElementById(name).innerHTML = text;
-        }
-        function printLi(name, Obj) {
-            let html = '';
-            for (obj in Obj) {
-                html += '<li>';
-                html += Obj[obj];
-                html += '</li>';
+<script>
+    const {createApp} = Vue
+    createApp({
+        data() {
+            return {
+                message: 'Hello Vue!',
+                header: {
+                    // 姓名
+                    name: 'NanXu',
+                    // 职位
+                    position: 'Java高级开发工程师',
+                    // 期望工作地址
+                    address: '武汉',
+                    // 期望薪资
+                    salary: '',
+                    // 性别和年龄
+                    sexAndAge: '男 / 24岁',
+                    // 工作时间
+                    workingHours: '1999 / 09 - 至今 · 1年工作经验',
+                    // 毕业学校
+                    school: '清华大学 · 计算机科学',
+                    // 手机号
+                    tel: '18888888888',
+                    // github地址
+                    github: 'pannanxu',
+                    // 个人主页
+                    home: 'doc.mvvm.io',
+                    // 邮箱
+                    email: 'pannanx@gmail.com'
+                },
+                majors: [
+                    '技能 A',
+                    '技能 B',
+                    '技能 C',
+                    '技能 D',
+                    '技能 E'
+                ],
+                works: [
+                    '上海XX科技有限公司 • Java高级开发工程师 • 1999-06 ～ 至今',
+                    '上海XX科技有限公司 • Java开发工程师 • 1999-09 ～ 2021-06'
+                ],
+                projects: [
+                    {
+                        name: 'ProjectName • TagA • 微信小程序/PC • 上海XX科技有限公司 • 1999-11 ～ 至今',
+                        describe: `project describe ...
+		`,
+                        duty: `
+        1、A <br />
+        2、B <br />
+        3、C <br />
+        4、D <br />
+        5、E <br />
+		`,
+                        technology: 'SpringBoot2.7 SpringMVC SpringSecurity MyBatis Netty MQTT RabbitMQ SpringDoc Vue2 MySQL HBase Redis 微信支付'
+                    },
+                ],
+                judges: [
+                    '我的性格：本人性格温和，善于与人沟通，心理承受能力强',
+                    '我的优势：热爱技术、自学能力强，有良好的自我认知。全面的技能树与开阔的视野，良好的心态、情商与沟通能力。',
+                    '跟进技术：每天在必去各大论坛了解最新的技术，不说样样都能学会，只要在我需要时知道有这么个东西可以解决问题',
+                    '注重规范：注重规范化开发，具有良好的沟通能力、团队合作精神及解决问题的能力',
+                    '克服困难：在遇到技术问题时我往往会去Google、Stack over flow等网站寻找答案，但是很多问题并不一定以及被人解决，所以需要熟练的阅读源码以及自己花时间琢磨'
+                ],
+                personalWorks: [
+                    'xxx • 作品的描述'
+                ]
             }
-            printHtml(name, html);
         }
-        window.onload = function () {
-            (function () {
-                for (app in App) {
+    }).mount('#app')
+</script>
 
-                    printHtml(app, App[app]);
-                }
-            })();
-
-            (function () {
-                printLi('major', Major);
-            })();
-
-            (function () {
-                let html = '';
-                for (project in Project) {
-                    let item = Project[project];
-                    html += `
-                        <article class="project-item"><header class="clearify"><div class="title left">
-                            ${item.name}
-                        </div><div class="time right">
-                            ${item.time}
-                        </div></header><div class="content"><b class="c-t">项目描述：</b><span class="c-msg">
-                            ${item.projectDesc}
-                        </span></div><div class="content"><b class="c-t">责任描述：</b><span class="c-msg">
-                            ${item.respDesc}
-                        </span></div><div class="content"><b class="c-t">技术栈：</b><span class="c-js">`;
-                    let tec = item.technology.split(' ');
-                    for (t in tec) {
-                        html += `<span>${tec[t]}</span>`
-                    }
-                    html += `</span></div></article>`;
-                }
-                printHtml('Project', html);
-            })();
-
-            (function () {
-                printLi('Me', Me);
-            })();
-
-            (function () {
-                let html = `
-                    <a href="tel:${Contact[0]}">
-                        <span>${Contact[0]}</span>
-                        <i class="fa fa-phone-square"></i>
-                    </a>
-                    <a href="https://www.${Contact[1]}">
-                        <span>${Contact[1]}</span>
-                        <i class="fa fa-git-square"></i>
-                    </a>
-                    <a href="http://${Contact[2]}">
-                        <span>${Contact[2]}</span>
-                        <i class="fa fa-h-square"></i>
-                    </a>
-                    <a href="Mailto:${Contact[3]}">
-                        <span>${Contact[3]}</span>
-                        <i class="fa fa-envelope-square"></i>
-                    </a>
-                `;
-                printHtml('Contact', html);
-            })();
-
-            (function () {
-                let html = '';
-                for (work in Work) {
-                    let item = Work[work];
-                    html += `<article class="project-item">
-                                <header class="clearify">
-                                    <div class="title left">
-                                        ${item.name}
-                                    </div>
-                                    <div class="time right">
-                                        ${item.time}
-                                    </div>
-                                </header>
-                                <div class="content"><span class="c-msg">
-                                        ${item.desc}
-                                    </span></div>
-                            </article>`
-                }
-                printHtml('Work', html);
-            })();
-        }
-    </script>
 </body>
-
 </html>
